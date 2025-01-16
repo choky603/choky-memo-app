@@ -1,16 +1,40 @@
 import type { Request, Response } from 'express';
+import { gfQuerySelect } from '../database/queryUtil';
 
-// Mock database
-const users = [
-  {
-    username: 'choky@gmail.com',
-    password: '1234',
-    id: 1,
-    name: '고래상어2',
-  },
-];
+interface IUser {
+  userId: string;
+  userName: string;
+  memo: string;
+}
 
-export const getUserProfile = (req: Request, res: Response) => {
-  //console.log(`users[0].name:${users[0].name}`)
-  res.json({ id: users[0].id, username: users[0].name, role: 'User' });
+export const getUserProfile = async (req: Request, res: Response) => {
+  const { userId } = req.query;
+  // console.log(`@userId:${userId}`);
+
+  let userRows: IUser[] = [];
+  let user: IUser = {
+    userId: '',
+    userName: '',
+    memo: '',
+  };
+
+  const sql = `
+      select user_id    as userId
+           , user_name  as userName
+           , memo       as memo
+        from tb_user_m
+       where user_id = '${userId}'`;
+  userRows = (await gfQuerySelect(sql, userRows)) as IUser[];
+  console.log(`${JSON.stringify(userRows)}`);
+
+  // 사용자정보가 있으면
+  if (userRows.length > 0) {
+    user = userRows[0];
+  }
+
+  res.json({
+    id: user.userId,
+    username: user.userName,
+    role: 'User',
+  });
 };

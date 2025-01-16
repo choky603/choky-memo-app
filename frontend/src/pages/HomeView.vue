@@ -47,7 +47,7 @@ async function procLogout() {
 async function getProfile() {
   try {
     // #TODO 스토어 사용으로 변경
-    const userProfile = await getUserProfile()
+    const userProfile = await getUserProfile('choky@gmail.com')
     console.log('사용자 프로필:', JSON.stringify(userProfile))
     arrData.value = JSON.stringify(userProfile)
   } catch (error) {

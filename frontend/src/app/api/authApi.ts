@@ -1,8 +1,8 @@
 import axiosInstance from './axiosInstance'
 import router from '@/app/router'
 
-export const login = async (username: string, password: string) => {
-  const response = await axiosInstance.post('/auth/login', { username, password })
+export const login = async (userId: string, password: string) => {
+  const response = await axiosInstance.post('/auth/login', { userId, password })
 
   // console.log(`response:${JSON.stringify(response)}`)
   if (response.data) {
