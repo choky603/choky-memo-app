@@ -36,6 +36,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mariadb": "^3.4.0"
+    "mariadb": "^3.4.0",
+    "mybatis-mapper": "^0.8.0"
   }
 }

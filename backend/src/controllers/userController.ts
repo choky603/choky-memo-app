@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { gfQuerySelect } from '../database/queryUtil';
+import { gfSelectUser } from '../database/queryUtil';
 
 interface IUser {
   userId: string;
@@ -18,14 +18,10 @@ export const getUserProfile = async (req: Request, res: Response) => {
     memo: '',
   };
 
-  const sql = `
-      select user_id    as userId
-           , user_name  as userName
-           , memo       as memo
-        from tb_user_m
-       where user_id = '${userId}'`;
-  userRows = (await gfQuerySelect(sql, userRows)) as IUser[];
-  console.log(`${JSON.stringify(userRows)}`);
+  if (typeof userId === 'string') {
+    userRows = (await gfSelectUser({ userId }, userRows)) as IUser[];
+  }
+  //console.log(`${JSON.stringify(userRows)}`);
 
   // 사용자정보가 있으면
   if (userRows.length > 0) {

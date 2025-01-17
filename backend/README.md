@@ -1,5 +1,8 @@
 # node-ts-server
 
+-- MyBatis 테스트
+-- Sequelize 테스트
+
 ## 프로젝트 생성
 
 ```sh

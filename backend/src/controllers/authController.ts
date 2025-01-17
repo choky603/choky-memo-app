@@ -4,7 +4,7 @@ import {
   generateRefreshToken,
   verifyRefreshToken,
 } from '../utils/tokenUtils';
-import { gfQuerySelect } from '../database/queryUtil';
+import { gfSelectUser } from '../database/queryUtil';
 
 interface IUser {
   userId: string;
@@ -22,15 +22,8 @@ export const login = async (req: Request, res: Response) => {
     memo: '',
   };
 
-  const sql = `
-    select user_id    as userId
-         , user_name  as userName
-         , memo       as memo
-      from tb_user_m
-     where user_id = '${userId}'
-       and user_pw = '${password}'`;
-  userRows = (await gfQuerySelect(sql, userRows)) as IUser[];
-  // console.log(`${JSON.stringify(userRows)}`);
+  userRows = (await gfSelectUser({ userId, password }, userRows)) as IUser[];
+  //console.log(`${JSON.stringify(userRows)}`);
 
   // 사용자정보가 있으면
   if (userRows.length > 0) {
