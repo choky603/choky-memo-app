@@ -2,7 +2,7 @@ import pool from '../database/connect/mariadb';
 import mybatisMapper from 'mybatis-mapper';
 
 // MyBatis Mapper 초기화
-mybatisMapper.createMapper(['./mapper/user.xml']);
+mybatisMapper.createMapper(['src/mapper/user.xml']);
 
 export const gfSelectUser = async <T>(
   params: { userId: string; password?: string },

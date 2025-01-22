@@ -6,7 +6,7 @@
 
 ## frontend
 
-- vue3 + typescript + pinia (FDS 구조 채택)
+- vue3 + typescript + pinia (FSD 구조 채택)
 
 ## backend
 

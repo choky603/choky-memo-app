@@ -6,8 +6,8 @@ export const login = async (userId: string, password: string) => {
 
   // console.log(`response:${JSON.stringify(response)}`)
   if (response.data) {
-    console.log(`accessToken:${response.data.accessToken}`)
-    console.log(`refreshToken:${response.data.refreshToken}`)
+    //console.log(`accessToken:${response.data.accessToken}`)
+    //console.log(`refreshToken:${response.data.refreshToken}`)
     localStorage.setItem('accessToken', response.data.accessToken)
     localStorage.setItem('refreshToken', response.data.refreshToken)
   }
