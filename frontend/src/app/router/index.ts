@@ -14,6 +14,11 @@ const router = createRouter({
       name: 'todo',
       component: () => import('@/pages/TodoView.vue'),
     },
+    {
+      path: '/grid',
+      name: 'grid',
+      component: () => import('@/pages/GridView.vue'),
+    },
   ],
 })
 

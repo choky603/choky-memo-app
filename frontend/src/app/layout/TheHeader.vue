@@ -29,6 +29,7 @@ const isDrawer = ref(false)
 const items = [
   { title: 'Home', path: '/', icon: 'mdi-home' },
   { title: 'Todo', path: '/todo', icon: 'mdi-calendar' },
+  { title: 'Grid', path: '/grid', icon: 'mdi-calendar' },
 ]
 function toggleDrawer(): boolean {
   return (isDrawer.value = !isDrawer.value)
