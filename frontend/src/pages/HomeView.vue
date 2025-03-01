@@ -1,13 +1,25 @@
 <template>
-  <v-btn color="primary" @click="procLogin">로그인</v-btn>
-  <v-btn color="secondary" @click="procLogout">로그아웃</v-btn>
-  <v-btn color="accent" @click="getProfile">조회</v-btn>
-  <v-card :text="arrData"></v-card>
+  <div>
+    <v-btn color="primary" @click="procLogin">로그인</v-btn>
+    <v-btn color="secondary" @click="procLogout">로그아웃</v-btn>
+    <v-btn color="accent" @click="getProfile">조회</v-btn>
+    <v-card :text="arrData"></v-card>
+    <br />
+    <hr />
+    <h3>기본</h3>
+    <DatePicker locale="ko" v-model="date" />
+    <h3>YYYYMMDD HHMM</h3>
+    <DatePicker locale="ko" v-model="date" time-picker-inline format="yyyy.MM.dd HH:MM" />
+    <h3>MONTH</h3>
+    <DatePicker locale="ko" v-model="dateYYYYMM" month-picker format="yyyy.MM" :auto-apply="true" />
+    <hr />
+    <v-btn color="primary" @click="print">확인</v-btn>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
+import DatePicker from '@vuepic/vue-datepicker'
 // import bcrypt from 'bcryptjs'
 
 import { login, logout } from '@/app/api/authApi'
@@ -15,9 +27,16 @@ import { getUserProfile } from '@/app/api/userApi'
 
 const arrData = ref('')
 
-onMounted(() => {
-  console.log(`the component is now mounted.`)
-})
+const date = ref()
+const dateYYYYMM = ref({ year: new Date().getFullYear(), month: new Date().getMonth() - 1 })
+
+const print = () => {
+  console.log(`@date:${JSON.stringify(date.value)}`)
+  console.log(`@dateYYYYMM:${JSON.stringify(dateYYYYMM.value)}`)
+  console.log(
+    `#YYYYMM:${dateYYYYMM.value.year}${String(dateYYYYMM.value.month + 1).padStart(2, '0')}`,
+  )
+}
 
 async function procLogin() {
   try {
@@ -55,6 +74,10 @@ async function getProfile() {
     alert(`오류!!`)
   }
 }
+
+onMounted(() => {
+  console.log(`the component is now mounted.`)
+})
 </script>
 
 <style></style>
