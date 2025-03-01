@@ -9,9 +9,12 @@
     <h3>기본</h3>
     <DatePicker locale="ko" v-model="date" />
     <h3>YYYYMMDD HHMM</h3>
-    <DatePicker locale="ko" v-model="date" time-picker-inline format="yyyy.MM.dd HH:MM" />
+    <DatePicker locale="ko" v-model="date" time-picker-inline format="yyyy.MM.dd HH:mm:ss" />
     <h3>MONTH</h3>
     <DatePicker locale="ko" v-model="dateYYYYMM" month-picker format="yyyy.MM" :auto-apply="true" />
+    <hr />
+    <h3>Custom</h3>
+    <CustomDatePicker v-model="selectedDate"></CustomDatePicker>
     <hr />
     <v-btn color="primary" @click="print">확인</v-btn>
   </div>
@@ -20,19 +23,23 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import DatePicker from '@vuepic/vue-datepicker'
+import CustomDatePicker from '@/shared/components/DatePicker.vue'
 // import bcrypt from 'bcryptjs'
+import dayjs from 'dayjs'
 
 import { login, logout } from '@/app/api/authApi'
 import { getUserProfile } from '@/app/api/userApi'
 
-const arrData = ref('')
+const arrData = ref()
 
 const date = ref()
 const dateYYYYMM = ref({ year: new Date().getFullYear(), month: new Date().getMonth() - 1 })
+const selectedDate = ref(new Date())
 
 const print = () => {
   console.log(`@date:${JSON.stringify(date.value)}`)
-  console.log(`@dateYYYYMM:${JSON.stringify(dateYYYYMM.value)}`)
+  console.log(`@YYYY.MM.DD HH:mm:ss:${dayjs(date.value).format('YYYY.MM.DD HH:mm:ss')}`)
+
   console.log(
     `#YYYYMM:${dateYYYYMM.value.year}${String(dateYYYYMM.value.month + 1).padStart(2, '0')}`,
   )
@@ -76,7 +83,7 @@ async function getProfile() {
 }
 
 onMounted(() => {
-  console.log(`the component is now mounted.`)
+  // console.log(`the component is now mounted.`)
 })
 </script>
 
