@@ -14,6 +14,7 @@ export default defineConfig({
     },
   },
   server: {
+    host: '0.0.0.0',
     proxy: {
       // 프론트엔드에서 '/api'로 시작하는 요청을 백엔드로 프록시
       '/api': {
